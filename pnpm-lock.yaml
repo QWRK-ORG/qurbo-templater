@@ -11,9 +11,6 @@ importers:
       '@biomejs/biome':
         specifier: ^1.0.0
         version: 1.9.4
-      '@workspace/eslint-config':
-        specifier: workspace:*
-        version: link:packages/eslint-config
       '@workspace/typescript-config':
         specifier: workspace:*
         version: link:packages/typescript-config
@@ -60,12 +57,6 @@ importers:
       '@workspace/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      typescript:
-        specifier: ^5.7.3
-        version: 5.7.3
-
-  packages/eslint-config:
-    devDependencies:
       typescript:
         specifier: ^5.7.3
         version: 5.7.3

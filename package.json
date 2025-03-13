@@ -5,17 +5,26 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix",
+    "format": "turbo format",
+    "format:fix": "turbo format:fix",
+    "check-types": "turbo check-types",
+    "fix-types": "turbo fix-types",
+    "validate": "turbo lint check-types format",
+    "fix-all": "turbo lint:fix fix-types format:fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:hooks": "lefthook run pre-commit",
+    "clean": "bash ./scripts/clean.sh"
   },
   "devDependencies": {
-    "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "@biomejs/biome": "^1.0.0",
     "turbo": "^2.4.2",
     "typescript": "5.7.3"
   },
-  "packageManager": "pnpm@10.4.1",
+  "packageManager": "pnpm@10.5.1",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.14.0"
   }
 }

@@ -1,9 +1,0 @@
-{
-  "$schema": "https://json.schemastore.org/biome",
-  "extends": ["biome:recommended"],
-  "rules": {
-    "biome/no-unused-vars": "warn",
-    "biome/no-console": "warn"
-  },
-  "ignorePatterns": ["dist/**", "node_modules/**"]
-}
