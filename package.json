@@ -1,5 +1,5 @@
 {
-  "name": "shadcn-ui-monorepo",
+  "name": "qwrk-qurbo-templar",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -22,7 +22,8 @@
     "@workspace/typescript-config": "workspace:*",
     "lefthook": "^1.11.3",
     "turbo": "^2.4.2",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "vitest": "^3.0.8"
   },
   "packageManager": "pnpm@10.5.1",
   "engines": {

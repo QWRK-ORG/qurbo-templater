@@ -1,20 +1,20 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import { Inter, Roboto_Mono } from 'next/font/google'
 
-import "@workspace/ui/globals.css"
-import { Providers } from "@/components/providers"
+import { Providers } from '@/components/providers'
+import '@workspace/ui/globals.css'
 
-const fontSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-sans",
+const fontSans = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans'
 })
 
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+const fontMono = Roboto_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono'
 })
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode
 }>) {

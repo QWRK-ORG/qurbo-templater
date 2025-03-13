@@ -7,7 +7,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 # Print header
-echo -e "${GREEN}=== Qwrk Laconic Core - Cleanup Script ===${NC}"
+echo -e "${GREEN}=== Qwrk Core - Cleanup Script ===${NC}"
 echo -e "${YELLOW}This script will remove all node_modules, .next, and dist folders${NC}"
 echo
 

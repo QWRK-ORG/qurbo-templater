@@ -1,0 +1,212 @@
+version: "1.0"
+title: "UI Component Migration"
+description: "Transition UI components from flat files to folder-based structure with improved TypeScript typings, TSDoc, and Vitest tests"
+file:
+  path: "./packages/ui/src/components"
+  type: ["feature", "documentation", "migration"]
+directives:
+  focus: ["str"]           # Strict focus (no deviations)
+  pattern: ["nx-cc"]       # Next.js client component
+  ui: ["sd-ui"]            # shadcn/ui components
+  steps: ["lay", "form", "docs", "tst"]  # Layout, Form implementation, Documentation, Testing
+  criteria: ["ty", "a11y", "mob"]  # TypeScript strict, Accessibility, Mobile responsive
+  testing: ["vite"]        # Vitest testing
+
+migration_plan:
+  overview: |
+    This migration transitions UI components from flat files to a folder-based structure with improved TypeScript typings, TSDoc, and Vitest tests.
+    The process is divided into three phases to allow for systematic migration and tracking of progress.
+    
+  phases:
+    - name: "Phase 1: Structure Setup"
+      description: |
+        Create the folder structure and move component files while preserving git history.
+        This phase establishes the foundation for the new component architecture.
+      tasks:
+        - "Create folders for each component in this directory"
+        - "Add index.ts file that re-exports the component"
+        - "Move and rename component files using git mv to preserve history"
+        - "Update the main index.ts file with new import paths"
+      scripts:
+        - name: "generate-index-files.js"
+          purpose: "Creates index.ts files for all component directories"
+          usage: "node scripts/generate-index-files.js"
+        - name: "move-component-files.js"
+          purpose: "Moves component files from root to folders using git mv"
+          usage: "node scripts/move-component-files.js"
+        - name: "update-main-index.js"
+          purpose: "Updates main index.ts with new import paths"
+          usage: "node scripts/update-main-index.js"
+    
+    - name: "Phase 2: Types and Documentation"
+      description: |
+        Add TypeScript interfaces and proper TSDoc comments to all components.
+        This phase improves type safety and documentation for better developer experience.
+      tasks:
+        - "Create types.ts file with TypeScript interfaces and proper TSDoc"
+        - "Extract type definitions from existing components and enhance them"
+        - "Reference patterns in `./deprecated-with-types` directory but improve upon them"
+        - "Ensure backward compatibility through proper exports"
+        - "Type definitions must include TSDoc comments for all public interfaces"
+      scripts:
+        - name: "generate-types-files.js"
+          purpose: "Creates types.ts files with TypeScript interfaces and TSDoc"
+          usage: "node scripts/generate-types-files.js"
+    
+    - name: "Phase 3: Testing"
+      description: |
+        Add comprehensive test coverage for all components.
+        This phase ensures component functionality and prevents regressions.
+      tasks:
+        - "Create ComponentName.test.tsx file with Vitest tests"
+        - "Test files require minimum 3 test cases: rendering, props validation, user interactions"
+        - "Tests should cover basic rendering and key functionality"
+      scripts:
+        - name: "generate-test-files.js"
+          purpose: "Creates test files with basic test cases"
+          usage: "node scripts/generate-test-files.js"
+
+requirements:
+  acceptance:
+    - "All components must follow the folder structure defined in this document"
+    - "All components must have proper TypeScript typings with TSDoc comments"
+    - "All components must have test coverage for basic functionality"
+    - "All components must maintain backward compatibility"
+    - "Git history must be preserved for all components"
+  
+  constraints:
+    - "Process components in bulk by phase rather than individually"
+    - "Track progress by phase completion rather than by individual components"
+    - "Preserve existing component functionality"
+    - "Component migration must preserve git history using `git mv` commands"
+    - "Follow component structure patterns defined in this document"
+    - "Use scripts for bulk operations where possible"
+
+references:
+  paths:
+    - path: "./packages/ui/src/components"
+      description: "Source directory containing UI components"
+    - path: "./packages/ui/src/components/deprecated-with-types"
+      description: "Directory with deprecated components that have type definitions to reference"
+    - path: "./scripts"
+      description: "Directory containing migration scripts"
+
+  structures:
+    component_folder: |
+      component-name/
+      ├── index.ts            # Exports component and types
+      ├── ComponentName.tsx   # Component implementation
+      ├── types.ts            # TypeScript interfaces and types
+      └── ComponentName.test.tsx  # Component tests
+
+tracking:
+  phases:
+    - id: 1
+      name: "Structure Setup"
+      status: "In Progress"
+      tasks:
+        - task: "Create component folders"
+          status: "Completed"
+          details: "Created folders for all components"
+          script: "mkdir -p commands"
+        - task: "Create index.ts files"
+          status: "In Progress"
+          details: "Created index.ts files for accordion, alert-dialog, alert, aspect-ratio, avatar and all other components"
+          script: "node scripts/generate-index-files.js"
+        - task: "Move and rename component files"
+          status: "Not Started"
+          details: "Need to run git mv commands to preserve history"
+          script: "node scripts/move-component-files.js"
+        - task: "Update main index.ts"
+          status: "In Progress"
+          details: "Updated imports for accordion, alert-dialog, alert, aspect-ratio"
+          script: "node scripts/update-main-index.js"
+    - id: 2
+      name: "Types and Documentation"
+      status: "In Progress"
+      tasks:
+        - task: "Create types.ts files"
+          status: "In Progress"
+          details: "Created types.ts for accordion, alert-dialog, alert, aspect-ratio"
+          script: "node scripts/generate-types-files.js"
+        - task: "Extract and enhance type definitions"
+          status: "In Progress"
+          details: "Completed for accordion, alert-dialog, alert, aspect-ratio"
+    - id: 3
+      name: "Testing"
+      status: "In Progress"
+      tasks:
+        - task: "Create test files"
+          status: "In Progress"
+          details: "Created tests for accordion, alert-dialog, alert, aspect-ratio"
+          script: "node scripts/generate-test-files.js"
+  
+  components:
+    completed:
+      - "accordion"
+      - "alert-dialog"
+      - "alert"
+    in_progress:
+      - "aspect-ratio"
+    pending:
+      - "avatar"
+      - "badge"
+      - "breadcrumb"
+      - "button"
+      - "calendar"
+      - "card"
+      - "carousel"
+      - "chart"
+      - "checkbox"
+      - "collapsible"
+      - "combobox"
+      - "command"
+      - "context-menu"
+      - "date-picker"
+      - "dialog"
+      - "drawer"
+      - "dropdown-menu"
+      - "form"
+      - "hover-card"
+      - "input-otp"
+      - "input"
+      - "label"
+      - "menubar"
+      - "navigation-menu"
+      - "pagination"
+      - "popover"
+      - "progress"
+      - "radio-group"
+      - "resizable"
+      - "scroll-area"
+      - "select"
+      - "separator"
+      - "sheet"
+      - "sidebar"
+      - "skeleton"
+      - "slider"
+      - "sonner"
+      - "switch"
+      - "table"
+      - "tabs"
+      - "textarea"
+      - "toggle-group"
+      - "toggle"
+      - "tooltip"
+
+handoff_notes: |
+  The migration has been set up with a phased approach and automated scripts.
+  
+  Current status:
+  - All component folders have been created
+  - Index.ts files have been generated for all components
+  - Four components have been fully migrated (accordion, alert-dialog, alert, aspect-ratio)
+  
+  Next steps for the next developer:
+  1. Run the move-component-files.js script to move the remaining component files
+  2. Run the update-main-index.js script to update import paths
+  3. Run the generate-types-files.js script to create type definitions
+  4. Run the generate-test-files.js script to create test files
+  5. Update this qat.yml file as progress is made
+  
+  The infrastructure is now in place for a systematic, phased migration of all UI components.

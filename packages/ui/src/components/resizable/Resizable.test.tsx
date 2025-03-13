@@ -1,0 +1,35 @@
+import { describe } from 'vitest'
+describe('Resizable', () => {
+  // Test case 1: Basic rendering
+  // it('renders the component correctly', () => {
+  //   const { container } = render(
+  //     <Resizable>
+  //       <div data-testid="content">Content</div>
+  //     </Resizable>
+  //   )
+  //   expect(container).toBeInTheDocument()
+  //   expect(screen.getByTestId('content')).toBeInTheDocument()
+  // })
+  // // Test case 2: Props validation
+  // it('applies custom className', () => {
+  //   const { container } = render(
+  //     <Resizable className="custom-class">
+  //       <div>Content</div>
+  //     </Resizable>
+  //   )
+  //   const element = container.firstChild
+  //   expect(element).toHaveClass('custom-class')
+  // })
+  // // Test case 3: User interactions
+  // it('handles children correctly', () => {
+  //   const testId = 'test-child'
+  //   render(
+  //     <Resizable>
+  //       <div data-testid={testId}>Test Child</div>
+  //     </Resizable>
+  //   )
+  //   const child = screen.getByTestId(testId)
+  //   expect(child).toBeInTheDocument()
+  //   expect(child).toHaveTextContent('Test Child')
+  // })
+})

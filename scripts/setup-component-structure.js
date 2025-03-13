@@ -7,11 +7,12 @@
  * following the React component conventions.
  */
 
-const fs = require('node:fs')
-const path = require('node:path')
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
 
 // Base directory for components
-const BASE_DIR = path.join(process.cwd(), 'apps/deploy-fe/src/components')
+const BASE_DIR = path.join(__dirname, '../packages/ui/src/components');
 
 // Component mappings from migration list
 const componentMappings = [
@@ -76,6 +77,47 @@ function createComponentFileContent(componentName) {
 }
 
 /**
+ * Create types.ts file content with TSDoc
+ */
+function createTypesContent(componentName) {
+  const pascalName = componentName.split('-').map(p => p[0].toUpperCase() + p.slice(1)).join('');
+  return `export interface ${pascalName}Props {\n` +
+    `  /**\n` +
+    `   * @param children - Component content\n` +
+    `   * @example <${pascalName}>Example</${pascalName}>\n` +
+    `   */\n` +
+    `  children: React.ReactNode;\n` +
+    `}\n`;
+}
+
+/**
+ * Create test.tsx file content
+ */
+function createTestContent(componentName) {
+  const pascalName = componentName.split('-').map(p => p[0].toUpperCase() + p.slice(1)).join('');
+  return `import { ${pascalName} } from './${pascalName}';\n` +
+    `import { render, screen } from '@testing-library/react';\n` +
+    `import userEvent from '@testing-library/user-event';\n\n` +
+    `describe('${pascalName}', () => {\n` +
+    `  test('renders with default props', () => {\n` +
+    `    const { container } = render(<${pascalName} />);\n` +
+    `    expect(container).toBeInTheDocument();\n` +
+    `  });\n\n` +
+    `  test('validates prop types', () => {\n` +
+    `    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});\n` +
+    `    render(<${pascalName} invalidProp={123} />);\n` +
+    `    expect(consoleSpy).toHaveBeenCalled();\n` +
+    `    consoleSpy.mockRestore();\n` +
+    `  });\n\n` +
+    `  test('handles interactions', async () => {\n` +
+    `    render(<${pascalName} />);\n` +
+    `    await userEvent.click(screen.getByRole('button'));\n` +
+    `    expect(screen.getByText('Expected')).toBeVisible();\n` +
+    `  });\n` +
+    `});\n`;
+}
+
+/**
  * Create the folder structure for a component
  */
 function setupComponentStructure(mapping) {
@@ -98,7 +140,7 @@ function setupComponentStructure(mapping) {
   // Create types.ts file
   const typesPath = path.join(componentDir, 'types.ts')
   if (!fs.existsSync(typesPath)) {
-    fs.writeFileSync(typesPath, createTypesFileContent(name))
+    fs.writeFileSync(typesPath, createTypesContent(name))
     console.log(`Created file: ${typesPath}`)
   }
 
@@ -114,6 +156,13 @@ function setupComponentStructure(mapping) {
   if (!fs.existsSync(componentPath)) {
     fs.writeFileSync(componentPath, createComponentFileContent(name))
     console.log(`Created file: ${componentPath}`)
+  }
+
+  // Create test.tsx file
+  const testPath = path.join(componentDir, `${name}.test.tsx`)
+  if (!fs.existsSync(testPath)) {
+    fs.writeFileSync(testPath, createTestContent(name))
+    console.log(`Created file: ${testPath}`)
   }
 }
 

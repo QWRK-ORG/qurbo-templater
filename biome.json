@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["node_modules", "dist", "build", ".next", ".turbo"]
+    "ignore": ["node_modules", "dist", "build", ".next", ".turbo", "packages/ui/src/components/deprecated-with-types"]
   },
   "formatter": {
     "enabled": true,
@@ -41,6 +41,5 @@
       "trailingCommas": "none"
     }
   },
-  
- "overrides":[]
+  "overrides": []
 }
