@@ -4,4 +4,6 @@
  * @packageDocumentation
  */
 
-export * from "./Button.js";
+export * from './Button.js';
+export * from './Button.test.js';
+export * from './types.js';
